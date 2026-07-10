@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Brand Lab — Where brands become impossible to ignore</title>
+<meta name="description" content="An interactive editorial experience by Zaida Zaman. Open the case files. Investigate the thinking.">
+<meta property="og:title" content="The Brand Lab">
+<meta property="og:description" content="Not a portfolio. An investigation into how a creative marketing strategist thinks.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Instrument+Serif:ital@0;1&family=Caveat:wght@500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --crimson:#780000;
+  --red:#C1121F;
+  --cream:#FDF0D5;
+  --ocean:#003049;
+  --blue:#669BBC;
+  --white:#FFFFFF;
+  --display:'Archivo',sans-serif;
+  --serif:'Instrument Serif',serif;
+  --hand:'Caveat',cursive;
+  --mono:'IBM Plex Mono',monospace;
+  --pad:clamp(20px,5vw,84px);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--white);color:var(--ocean);font-family:var(--display);font-size:17px;line-height:1.65;overflow-x:hidden}
+::selection{background:var(--red);color:var(--cream)}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font-family:inherit}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.hand{font-family:var(--hand);font-weight:600}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:80;display:flex;justify-content:space-between;align-items:center;padding:18px var(--pad);mix-blend-mode:difference;color:#fff;pointer-events:none}
+nav a{pointer-events:auto;text-decoration:none}
+nav .logo{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase}
+nav .contact-link{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;border-bottom:1px solid currentColor;padding-bottom:2px}
+
+/* ============ LANDING ============ */
+.landing{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding:0 var(--pad);position:relative}
+.landing .file-tag{font-family:var(--mono);font-size:clamp(10px,1.2vw,13px);letter-spacing:.2em;text-transform:uppercase;color:var(--red);margin-bottom:3vh;overflow:hidden}
+.landing .file-tag span{display:inline-block;transform:translateY(120%);animation:rise .8s cubic-bezier(.2,.7,.2,1) .3s forwards}
+.landing h1{font-weight:900;font-stretch:120%;text-transform:uppercase;letter-spacing:-.035em;line-height:.84;font-size:clamp(64px,15.5vw,230px)}
+.landing h1 .word{display:block;overflow:hidden}
+.landing h1 .word span{display:inline-block;transform:translateY(110%);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}
+.landing h1 .w1 span{animation-delay:.45s}
+.landing h1 .w2 span{animation-delay:.58s;color:var(--red)}
+.landing h1 .w3 span{animation-delay:.71s}
+@keyframes rise{to{transform:translateY(0)}}
+.landing .sub{margin-top:4.5vh;max-width:560px;opacity:0;animation:fadeUp .9s ease 1.25s forwards}
+.landing .sub p.big{font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.8vw,30px);line-height:1.2;color:var(--crimson)}
+.landing .sub p.small{margin-top:14px;color:rgba(0,48,73,.6);font-size:15.5px;max-width:420px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.scroll-cue{position:absolute;bottom:26px;left:var(--pad);display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(0,48,73,.5);opacity:0;animation:fadeUp .8s ease 1.8s forwards}
+.scroll-cue .tick{width:1px;height:34px;background:var(--red);transform-origin:top;animation:tickle 1.6s ease-in-out infinite}
+@keyframes tickle{0%,100%{transform:scaleY(.35)}50%{transform:scaleY(1)}}
+.landing .stamp{position:absolute;top:16vh;right:var(--pad);font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--crimson);border:1.5px solid var(--crimson);padding:10px 14px;transform:rotate(4deg);opacity:0;animation:stampIn .5s cubic-bezier(.2,1.4,.4,1) 1.6s forwards}
+@keyframes stampIn{from{opacity:0;transform:rotate(4deg) scale(1.6)}to{opacity:.85;transform:rotate(4deg) scale(1)}}
+@media(max-width:760px){.landing .stamp{display:none}}
+
+/* ============ ACTS (pinned statements) ============ */
+.acts{height:420vh;position:relative;background:var(--ocean)}
+.acts-sticky{position:sticky;top:0;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.act{position:absolute;padding:0 var(--pad);text-align:center;max-width:1200px;opacity:0;transform:translateY(40px) scale(.98);transition:opacity .45s ease,transform .45s ease;will-change:opacity,transform}
+.act.on{opacity:1;transform:none}
+.act h2{font-weight:900;font-stretch:118%;text-transform:uppercase;letter-spacing:-.03em;line-height:.9;font-size:clamp(40px,9vw,130px);color:var(--cream)}
+.act h2 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;letter-spacing:0;color:var(--blue)}
+.act .side{margin-top:26px;font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(253,240,213,.5)}
+.act .hand-note{font-family:var(--hand);font-size:clamp(20px,3vw,30px);color:var(--red);transform:rotate(-2deg);display:inline-block;margin-top:20px}
+.acts-progress{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.acts-progress i{width:26px;height:2px;background:rgba(253,240,213,.25);transition:background .3s}
+.acts-progress i.on{background:var(--red)}
+
+/* ============ OBSERVATION WALL ============ */
+.wall-wrap{height:380vh;position:relative;background:var(--cream)}
+.wall-sticky{position:sticky;top:0;height:100svh;overflow:hidden}
+.wall-head{position:absolute;top:9svh;left:var(--pad);z-index:3}
+.wall-head .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.wall-head h2{font-weight:900;font-stretch:116%;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(30px,5vw,64px);line-height:.95;color:var(--crimson);margin-top:10px}
+.wall-head p{font-family:var(--hand);font-size:clamp(19px,2.4vw,26px);color:var(--ocean);opacity:.75;margin-top:8px;transform:rotate(-1.2deg)}
+.board{position:absolute;inset:0}
+.pin-item{position:absolute;will-change:transform,opacity;filter:drop-shadow(0 12px 22px rgba(0,48,73,.16))}
+.pin-item::before{content:"";position:absolute;top:-7px;left:50%;transform:translateX(-50%);width:12px;height:12px;border-radius:50%;background:var(--red);box-shadow:inset 0 -2px 3px rgba(0,0,0,.3);z-index:2}
+.note{background:#fff;padding:20px 20px 24px;width:min(250px,58vw);font-family:var(--hand);font-size:clamp(19px,2.1vw,24px);line-height:1.25;color:var(--ocean)}
+.note.red{color:var(--crimson)}
+.note .q{color:var(--red)}
+.photo{background:#fff;padding:10px 10px 34px;width:min(210px,48vw)}
+.photo img{width:100%;aspect-ratio:1/1.05;object-fit:cover}
+.photo .cap{font-family:var(--hand);font-size:17px;color:var(--ocean);text-align:center;margin-top:8px}
+.statcard{background:var(--ocean);color:var(--cream);padding:18px 20px;width:min(230px,52vw)}
+.statcard .k{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.statcard .v{font-weight:900;font-stretch:114%;font-size:32px;letter-spacing:-.02em;line-height:1.05;margin-top:6px}
+.statcard .s{font-family:var(--mono);font-size:10.5px;color:rgba(253,240,213,.6);margin-top:6px;text-transform:uppercase;letter-spacing:.08em}
+
+/* ============ CASE INDEX ============ */
+.index{padding:clamp(90px,14vh,160px) 0 clamp(70px,10vh,120px);background:var(--white)}
+.index .head{padding:0 var(--pad);margin-bottom:8vh}
+.index .head .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.index .head h2{font-weight:900;font-stretch:116%;text-transform:uppercase;letter-spacing:-.025em;font-size:clamp(36px,6.4vw,92px);line-height:.92;margin-top:14px}
+.index .head h2 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;color:var(--red)}
+.index .head p{max-width:520px;margin-top:22px;color:rgba(0,48,73,.65)}
+.case-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:clamp(16px,4vw,50px);width:100%;text-align:left;background:none;border:none;border-top:1.5px solid rgba(0,48,73,.16);padding:clamp(26px,4vh,44px) var(--pad);cursor:pointer;color:var(--ocean);position:relative;overflow:hidden;transition:color .3s}
+.case-row:last-of-type{border-bottom:1.5px solid rgba(0,48,73,.16)}
+.case-row .band{position:absolute;inset:0;transform:scaleY(0);transform-origin:bottom;transition:transform .38s cubic-bezier(.6,.1,.2,1);z-index:0}
+.case-row:hover .band,.case-row:focus-visible .band{transform:scaleY(1)}
+.case-row>*{position:relative;z-index:1}
+.case-row .no{font-family:var(--mono);font-size:clamp(12px,1.4vw,14px);letter-spacing:.14em}
+.case-row .titles h3{font-weight:900;font-stretch:114%;text-transform:uppercase;letter-spacing:-.015em;font-size:clamp(22px,3.8vw,46px);line-height:1}
+.case-row .titles .prob{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.8vw,19px);opacity:.68;margin-top:6px}
+.case-row .open{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap;display:flex;align-items:center;gap:10px}
+.case-row .open .arr{transition:transform .3s}
+.case-row:hover .open .arr{transform:translateX(7px)}
+.case-row.t-coffee:hover{color:var(--crimson)} .case-row.t-coffee .band{background:var(--cream)}
+.case-row.t-dive:hover{color:var(--cream)} .case-row.t-dive .band{background:var(--ocean)}
+.case-row.t-pilates:hover{color:var(--ocean)} .case-row.t-pilates .band{background:#F5EFE6}
+.case-row.t-founder:hover{color:var(--cream)} .case-row.t-founder .band{background:var(--crimson)}
+.case-row.t-followers:hover{color:var(--crimson)} .case-row.t-followers .band{background:#F8D8D8}
+.case-row.t-launch:hover{color:var(--cream)} .case-row.t-launch .band{background:var(--red)}
+@media(max-width:640px){.case-row{grid-template-columns:auto 1fr}.case-row .open{display:none}}
+
+/* ============ CASE DIALOG SHELL + THEMES ============ */
+dialog.case{border:none;padding:0;width:100vw;max-width:100vw;height:100dvh;max-height:100dvh;background:var(--c-bg,#fff);color:var(--c-ink,var(--ocean))}
+dialog.case::backdrop{background:rgba(0,20,32,.85)}
+.case-inner{height:100%;overflow-y:auto;overscroll-behavior:contain;background:var(--c-bg);color:var(--c-ink)}
+.case-top{position:sticky;top:0;z-index:6;display:flex;justify-content:space-between;align-items:center;gap:14px;padding:15px var(--pad);background:var(--c-bar-bg);color:var(--c-bar-ink);border-bottom:2.5px solid var(--c-acc)}
+.case-top .id{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase}
+.case-top .id b{color:var(--c-acc);font-weight:600}
+.case-close{background:transparent;border:1.5px solid currentColor;color:inherit;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:9px 16px;cursor:pointer;transition:background .2s,color .2s}
+.case-close:hover{background:var(--c-acc);border-color:var(--c-acc);color:var(--c-bg)}
+.case-hero{min-height:72svh;display:flex;flex-direction:column;justify-content:center;padding:10svh var(--pad) 7svh;position:relative;overflow:hidden}
+.case-hero .meta{display:flex;gap:22px;flex-wrap:wrap;margin-bottom:3vh;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.6}
+.case-hero h2{font-weight:900;font-stretch:118%;text-transform:uppercase;letter-spacing:-.03em;line-height:.88;font-size:clamp(42px,9vw,120px)}
+.case-hero h2 em{font-style:normal;color:var(--c-acc)}
+.case-hero .verdict{margin-top:3.5vh;font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.6vw,27px);line-height:1.3;max-width:720px;color:var(--c-soft)}
+.case-hero .hand-margin{position:absolute;right:var(--pad);bottom:8svh;font-family:var(--hand);font-size:clamp(19px,2.2vw,26px);color:var(--c-acc);transform:rotate(-2deg);max-width:240px;line-height:1.2}
+@media(max-width:820px){.case-hero .hand-margin{display:none}}
+.case-body{padding:0 var(--pad) 9svh}
+.cs{padding:clamp(36px,6svh,60px) 0;border-bottom:1px solid var(--c-line);max-width:1100px}
+.cs:last-child{border-bottom:none}
+.cs .cs-label{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--c-acc);margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.cs .cs-label::before{content:"";width:24px;height:1.5px;background:var(--c-acc)}
+.cs h3{font-weight:850;font-stretch:112%;font-size:clamp(22px,3.2vw,34px);letter-spacing:-.015em;line-height:1.04;text-transform:uppercase;margin-bottom:18px;max-width:800px}
+.cs p{max-width:700px;color:var(--c-body);margin-bottom:14px}
+.cs p:last-child{margin-bottom:0}
+.cs p strong{color:var(--c-ink)}
+.cs .pull{font-family:var(--serif);font-style:italic;font-size:clamp(20px,2.9vw,29px);line-height:1.28;color:var(--c-soft);border-left:3.5px solid var(--c-acc);padding-left:24px;margin:26px 0;max-width:660px}
+.spread{margin:5svh calc(-1 * var(--pad)) 0;position:relative}
+.spread img{width:100%;max-height:92svh;object-fit:cover}
+.spread .spread-cap{position:absolute;bottom:18px;left:var(--pad);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--c-bg);color:var(--c-ink);padding:8px 12px}
+.asset-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:14px;margin-top:24px}
+.asset{border:1.5px solid var(--c-line);padding:20px 19px;background:var(--c-card,transparent)}
+.asset .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--c-acc);display:block;margin-bottom:10px}
+.asset h5{font-weight:800;font-size:15.5px;line-height:1.3;margin-bottom:8px;color:var(--c-ink)}
+.asset p{font-size:14px;line-height:1.55;color:var(--c-body);margin:0}
+.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px;margin-top:24px}
+.kpi{border-top:3px solid var(--c-acc);padding-top:14px}
+.kpi .v{font-weight:900;font-stretch:116%;font-size:clamp(28px,3.6vw,42px);letter-spacing:-.02em;line-height:1;color:var(--c-ink)}
+.kpi .l{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--c-body);margin-top:9px}
+.cd-note{background:var(--c-note-bg);color:var(--c-note-ink);padding:clamp(28px,4.5vw,46px);margin-top:2svh;max-width:1100px}
+.cd-note .cs-label{color:var(--c-note-acc)}
+.cd-note .cs-label::before{background:var(--c-note-acc)}
+.cd-note p{color:var(--c-note-ink);opacity:.92;font-size:16.5px;max-width:none}
+.cd-note .sig{margin-top:18px;font-family:var(--hand);font-size:24px;opacity:1}
+.deliverables{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.deliverables span{font-family:var(--mono);font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;border:1px solid var(--c-line);padding:6px 11px;color:var(--c-body)}
+.case-next{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:26px var(--pad);background:var(--c-bar-bg);color:var(--c-bar-ink);border-top:2.5px solid var(--c-acc);flex-wrap:wrap}
+.case-next .mono{opacity:.75}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--red);color:var(--cream);text-decoration:none;font-family:var(--mono);font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;padding:17px 28px;border:none;cursor:pointer;transition:transform .2s,background .2s}
+.btn:hover{background:var(--crimson);transform:translateY(-2px)}
+
+/* Themes */
+.theme-coffee{--c-bg:#FDF0D5;--c-ink:#780000;--c-body:rgba(120,0,0,.78);--c-soft:#9E2A00;--c-soft:#A4321B;--c-soft:#8C1D0F;--c-acc:#C1121F;--c-line:rgba(120,0,0,.22);--c-card:#fff;--c-bar-bg:#780000;--c-bar-ink:#FDF0D5;--c-note-bg:#780000;--c-note-ink:#FDF0D5;--c-note-acc:#669BBC}
+.theme-dive{--c-bg:#003049;--c-ink:#FDF0D5;--c-body:rgba(253,240,213,.78);--c-soft:#669BBC;--c-acc:#669BBC;--c-line:rgba(253,240,213,.2);--c-card:rgba(255,255,255,.04);--c-bar-bg:#00263A;--c-bar-ink:#FDF0D5;--c-note-bg:#FDF0D5;--c-note-ink:#003049;--c-note-acc:#C1121F}
+.theme-pilates{--c-bg:#FFFFFF;--c-ink:#003049;--c-body:rgba(0,48,73,.72);--c-soft:#4E7A96;--c-acc:#669BBC;--c-line:rgba(0,48,73,.16);--c-card:#F8F4EC;--c-bar-bg:#F5EFE6;--c-bar-ink:#003049;--c-note-bg:#003049;--c-note-ink:#FDF0D5;--c-note-acc:#669BBC}
+.theme-founder{--c-bg:#FFFFFF;--c-ink:#003049;--c-body:rgba(0,48,73,.78);--c-soft:#780000;--c-acc:#C1121F;--c-line:rgba(0,48,73,.18);--c-card:#fff;--c-bar-bg:#003049;--c-bar-ink:#FDF0D5;--c-note-bg:#FDF0D5;--c-note-ink:#780000;--c-note-acc:#C1121F}
+.theme-followers{--c-bg:#FFF6F4;--c-bg:#FFF;--c-ink:#780000;--c-body:rgba(120,0,0,.75);--c-soft:#C1121F;--c-acc:#C1121F;--c-line:rgba(120,0,0,.2);--c-card:#FDF0D5;--c-bar-bg:#C1121F;--c-bar-ink:#FDF0D5;--c-note-bg:#003049;--c-note-ink:#FDF0D5;--c-note-acc:#669BBC}
+.theme-launch{--c-bg:#C1121F;--c-ink:#FDF0D5;--c-body:rgba(253,240,213,.85);--c-soft:#FDF0D5;--c-acc:#FDF0D5;--c-line:rgba(253,240,213,.28);--c-card:rgba(0,0,0,.12);--c-bar-bg:#780000;--c-bar-ink:#FDF0D5;--c-note-bg:#FDF0D5;--c-note-ink:#780000;--c-note-acc:#C1121F}
+.theme-launch .btn{background:var(--cream);color:var(--crimson)} .theme-launch .btn:hover{background:#fff}
+.theme-dive .btn{background:var(--blue);color:#00263A} .theme-dive .btn:hover{background:var(--cream)}
+
+/* dive bubbles */
+.bubbles{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bubbles i{position:absolute;bottom:-30px;border:1.5px solid rgba(102,155,188,.45);border-radius:50%;animation:bub linear infinite}
+@keyframes bub{to{transform:translateY(-110svh)}}
+
+/* reveal inside dialogs and page */
+.rv{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+.rv.in{opacity:1;transform:none}
+
+/* ============ CREATIVE LAB ============ */
+.lab{background:var(--ocean);color:var(--cream);padding:clamp(90px,13vh,150px) var(--pad)}
+.lab .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue)}
+.lab h2{font-weight:900;font-stretch:116%;text-transform:uppercase;letter-spacing:-.025em;font-size:clamp(34px,6vw,84px);line-height:.92;margin-top:14px}
+.lab h2 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;color:var(--red)}
+.lab .lede{max-width:560px;margin-top:22px;color:rgba(253,240,213,.72)}
+.lab-panel{margin-top:7vh;display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:clamp(24px,4vw,60px)}
+@media(max-width:900px){.lab-panel{grid-template-columns:1fr}}
+.lab-controls .group{margin-bottom:34px}
+.lab-controls .g-label{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:14px}
+.chips{display:flex;flex-wrap:wrap;gap:9px}
+.chip{background:transparent;border:1.5px solid rgba(253,240,213,.35);color:var(--cream);font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:11px 16px;cursor:pointer;transition:all .2s}
+.chip:hover{border-color:var(--cream)}
+.chip.sel{background:var(--red);border-color:var(--red);color:var(--cream)}
+.run-btn{margin-top:6px;width:100%;background:var(--red);border:none;color:var(--cream);font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:19px;cursor:pointer;transition:background .2s,transform .15s}
+.run-btn:hover{background:#a90e1a}
+.run-btn:active{transform:scale(.985)}
+.lab-out{border:1.5px solid rgba(253,240,213,.25);padding:clamp(24px,3.5vw,44px);min-height:380px;position:relative;background:rgba(0,0,0,.14)}
+.lab-out .placeholder{font-family:var(--hand);font-size:clamp(21px,2.6vw,28px);color:rgba(253,240,213,.45);transform:rotate(-1.5deg);max-width:380px}
+.exp{display:none}
+.exp.show{display:block;animation:fadeUp .5s ease}
+.exp .exp-id{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);border-bottom:1px solid rgba(253,240,213,.2);padding-bottom:16px;margin-bottom:24px}
+.exp .hook{font-weight:850;font-stretch:112%;font-size:clamp(22px,3.2vw,34px);line-height:1.06;letter-spacing:-.015em;text-transform:uppercase}
+.exp .fields{margin-top:28px;display:grid;gap:20px}
+.exp .field .fk{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--red);margin-bottom:7px}
+.exp .field .fv{color:rgba(253,240,213,.85);font-size:15.5px;max-width:640px}
+.exp .again{margin-top:30px;background:transparent;border:1.5px solid rgba(253,240,213,.4);color:var(--cream);font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:12px 18px;cursor:pointer;transition:all .2s}
+.exp .again:hover{border-color:var(--cream);background:rgba(253,240,213,.08)}
+.lab-fine{margin-top:16px;font-family:var(--hand);font-size:19px;color:rgba(253,240,213,.5);transform:rotate(-1deg)}
+
+/* ============ VAULT ============ */
+.vault{background:var(--white);padding:clamp(90px,13vh,150px) var(--pad)}
+.vault .lbl{font-family:var(--mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--red)}
+.vault h2{font-weight:900;font-stretch:116%;text-transform:uppercase;letter-spacing:-.025em;font-size:clamp(34px,6vw,84px);line-height:.92;margin-top:14px}
+.vault .lede{max-width:560px;margin-top:22px;color:rgba(0,48,73,.65)}
+.vault-door{margin-top:6vh;border:1.5px dashed rgba(0,48,73,.4);padding:clamp(30px,5vw,56px);text-align:center;cursor:pointer;background:none;width:100%;transition:border-color .25s,background .25s}
+.vault-door:hover{border-color:var(--red);background:rgba(253,240,213,.4)}
+.vault-door .lock{font-family:var(--mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--crimson)}
+.vault-door .hint{font-family:var(--hand);font-size:clamp(20px,2.6vw,27px);color:rgba(0,48,73,.6);margin-top:12px;transform:rotate(-1deg)}
+.vault-open{display:none;margin-top:5vh}
+.vault-open.show{display:block;animation:fadeUp .6s ease}
+.vault-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}
+.dead{position:relative;background:var(--cream);padding:26px 24px;transform:rotate(var(--rot,0deg))}
+.dead h5{font-weight:800;font-size:16.5px;line-height:1.3;color:var(--ocean);text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:2px;margin-bottom:12px}
+.dead .why{font-family:var(--hand);font-size:19px;line-height:1.25;color:var(--crimson)}
+.dead .stamp2{position:absolute;top:12px;right:12px;font-family:var(--mono);font-size:9px;letter-spacing:.16em;color:var(--red);border:1.5px solid var(--red);padding:4px 7px;transform:rotate(6deg);opacity:.85}
+.vault-note{margin-top:34px;max-width:620px;font-family:var(--serif);font-style:italic;font-size:clamp(19px,2.3vw,24px);color:var(--crimson);line-height:1.35}
+
+/* ============ NOTEBOOK ============ */
+.notebook{background:var(--cream);padding:clamp(100px,15vh,170px) var(--pad);display:flex;justify-content:center}
+.page{background:#fff;width:min(680px,100%);padding:clamp(40px,6vw,70px) clamp(28px,5vw,64px) clamp(50px,7vw,80px);box-shadow:0 24px 60px rgba(0,48,73,.14);position:relative;background-image:repeating-linear-gradient(transparent,transparent 43px,rgba(102,155,188,.25) 43px,rgba(102,155,188,.25) 44px);transform:rotate(-.4deg)}
+.page::before{content:"";position:absolute;top:0;bottom:0;left:clamp(20px,4vw,46px);width:1.5px;background:rgba(193,18,31,.3)}
+.page .line{font-family:var(--hand);font-size:clamp(23px,3.2vw,31px);line-height:44px;color:var(--ocean);padding-left:clamp(18px,3vw,36px)}
+.page .line.em{color:var(--crimson)}
+.page .date{font-family:var(--hand);font-size:19px;color:rgba(0,48,73,.45);text-align:right;margin-bottom:20px}
+
+/* ============ CONTACT ============ */
+.contact{background:var(--crimson);color:var(--cream);padding:clamp(100px,16vh,180px) var(--pad);text-align:center;position:relative;overflow:hidden}
+.contact h2{font-weight:900;font-stretch:118%;text-transform:uppercase;letter-spacing:-.028em;line-height:.9;font-size:clamp(38px,7.4vw,104px);max-width:1150px;margin:0 auto}
+.contact h2 em{font-family:var(--serif);font-style:italic;font-weight:400;text-transform:none;color:var(--blue)}
+.contact .mail{display:inline-block;margin-top:6vh;font-family:var(--mono);font-size:clamp(14px,2vw,19px);letter-spacing:.1em;color:var(--cream);text-decoration:none;border-bottom:2px solid var(--red);padding-bottom:6px;transition:border-color .25s,color .25s}
+.contact .mail:hover{border-color:var(--cream)}
+.contact .hand-ps{margin-top:5vh;font-family:var(--hand);font-size:clamp(19px,2.4vw,25px);color:rgba(253,240,213,.65);transform:rotate(-1.4deg)}
+footer{background:var(--ocean);color:rgba(253,240,213,.55);padding:24px var(--pad);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.swatches{display:flex;gap:6px}
+.swatches span{width:13px;height:13px;border-radius:50%}
+
+/* ============ MOTION SAFETY ============ */
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001s !important;animation-delay:0s !important;transition-duration:.001s !important}
+  .rv,.act{opacity:1 !important;transform:none !important}
+  .acts{height:auto}.acts-sticky{position:static;height:auto;padding:14vh 0;display:block}
+  .act{position:static;margin:8vh 0}
+  .wall-wrap{height:auto}.wall-sticky{position:static;height:auto;padding:12vh 0 8vh}
+  .board{position:static;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;padding:0 var(--pad)}
+  .pin-item{position:static !important;transform:none !important;opacity:1 !important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top">THE BRAND LAB · Nº 01</a>
+  <a class="contact-link" href="mailto:zaida.zaman@icloud.com">Start a case</a>
+</nav>
+
+<!-- ============ LANDING ============ -->
+<header class="landing" id="top">
+  <div class="stamp">Confidential · Open investigations</div>
+  <div class="file-tag"><span>hiremarketingexpert.com · An interactive editorial experience</span></div>
+  <h1>
+    <span class="word w1"><span>The</span></span>
+    <span class="word w2"><span>Brand</span></span>
+    <span class="word w3"><span>Lab</span></span>
+  </h1>
+  <div class="sub">
+    <p class="big">Where brands become impossible to ignore.</p>
+    <p class="small">You are not here to browse projects. You are here to investigate how a creative marketing strategist thinks.</p>
+  </div>
+  <div class="scroll-cue"><span class="tick"></span> Scroll to begin the investigation</div>
+</header>
+
+<!-- ============ ACTS ============ -->
+<section class="acts" id="acts">
+  <div class="acts-sticky">
+    <div class="act" data-act><h2>Most marketing<br>is <em>invisible.</em></h2><div class="side">Exhibit 01 — The Problem</div></div>
+    <div class="act" data-act><h2>Not because<br>it's bad.</h2><div class="side">Exhibit 02</div></div>
+    <div class="act" data-act><h2>Because it's<br><em>identical.</em></h2><div class="side">Exhibit 03</div></div>
+    <div class="act" data-act><h2>Memorable brands<br>ask <em>better questions.</em></h2><span class="hand-note">— so that's where we start.</span></div>
+    <div class="acts-progress" id="actsDots"></div>
+  </div>
+</section>
+
+<!-- ============ OBSERVATION WALL ============ -->
+<section class="wall-wrap" id="wall">
+  <div class="wall-sticky">
+    <div class="wall-head">
+      <div class="lbl">Section 01 — The Workspace</div>
+      <h2>The Observation<br>Wall</h2>
+      <p>every case begins here — with things everyone sees and nobody questions</p>
+    </div>
+    <div class="board" id="board"></div>
+  </div>
+</section>
+
+<!-- ============ CASE INDEX ============ -->
+<section class="index" id="cases">
+  <div class="head">
+    <div class="lbl rv">Section 02 — The Archive</div>
+    <h2 class="rv">Open a<br><em>case file.</em></h2>
+    <p class="rv">Six investigations. Each one starts with a real business problem and ends with a complete marketing system. Each one is a different world — enter carefully.</p>
+  </div>
+  <button class="case-row t-coffee rv" data-case="case-coffee"><span class="band"></span><span class="no">CASE 001</span><span class="titles"><h3>Beautiful Coffee. Forgettable Brand.</h3><span class="prob">Problem: everyone loves it. Nobody remembers it.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+  <button class="case-row t-dive rv" data-case="case-dive"><span class="band"></span><span class="no">CASE 002</span><span class="titles"><h3>Paradise Hidden In Plain Sight.</h3><span class="prob">Problem: world-class reef, empty calendar.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+  <button class="case-row t-pilates rv" data-case="case-pilates"><span class="band"></span><span class="no">CASE 003</span><span class="titles"><h3>Luxury Studio. Generic Marketing.</h3><span class="prob">Problem: the feed is undercutting the price tag.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+  <button class="case-row t-founder rv" data-case="case-founder"><span class="band"></span><span class="no">CASE 004</span><span class="titles"><h3>Brilliant Founder. Invisible Online.</h3><span class="prob">Problem: unforgettable in rooms, undiscoverable in search.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+  <button class="case-row t-followers rv" data-case="case-followers"><span class="band"></span><span class="no">CASE 005</span><span class="titles"><h3>Followers. No Customers.</h3><span class="prob">Problem: 48,000 people watching. Nobody buying.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+  <button class="case-row t-launch rv" data-case="case-launch"><span class="band"></span><span class="no">CASE 006</span><span class="titles"><h3>Launch In Fourteen Days. Nothing Ready.</h3><span class="prob">Problem: the date is fixed. The plan doesn't exist.</span></span><span class="open">Open file <span class="arr">→</span></span></button>
+</section>
+
+<!-- ============ CREATIVE LAB ============ -->
+<section class="lab" id="creativelab">
+  <div class="lbl rv">Section 03 — The Creative Lab</div>
+  <h2 class="rv">Run an experiment<br>on <em>your brand.</em></h2>
+  <p class="lede rv">This is a working corner of my internal toolkit. Choose your world and your problem — the lab returns a first hypothesis: one hook, the psychology behind it, and the metric that proves it's working.</p>
+  <div class="lab-panel rv">
+    <div class="lab-controls">
+      <div class="group">
+        <div class="g-label">01 · Your world</div>
+        <div class="chips" id="sectorChips"></div>
+      </div>
+      <div class="group">
+        <div class="g-label">02 · Your problem</div>
+        <div class="chips" id="problemChips"></div>
+      </div>
+      <button class="run-btn" id="runBtn">Run experiment →</button>
+      <p class="lab-fine">real strategy takes research. this takes one click. calibrate expectations accordingly.</p>
+    </div>
+    <div class="lab-out">
+      <p class="placeholder" id="labPh">select a world + a problem,<br>then run the experiment…</p>
+      <div class="exp" id="expCard">
+        <div class="exp-id"><span id="expNo">EXPERIMENT Nº 000</span><span id="expMeta"></span></div>
+        <div class="hook" id="expHook"></div>
+        <div class="fields">
+          <div class="field"><div class="fk">Format</div><div class="fv" id="expFormat"></div></div>
+          <div class="field"><div class="fk">Why it works</div><div class="fv" id="expWhy"></div></div>
+          <div class="field"><div class="fk">First metric to watch</div><div class="fv" id="expMetric"></div></div>
+        </div>
+        <button class="again" id="againBtn">↻ Run it again — different hypothesis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VAULT ============ -->
+<section class="vault" id="vault">
+  <div class="lbl rv">Section 04 — Restricted</div>
+  <h2 class="rv">The Vault.</h2>
+  <p class="lede rv">Every solved case sits on a pile of dead ideas. Most portfolios hide them. This lab keeps them on file — because judgment is knowing what to kill, and why.</p>
+  <button class="vault-door rv" id="vaultDoor">
+    <div class="lock">🔒 Restricted — rejected concepts inside</div>
+    <div class="hint">go on. everyone looks.</div>
+  </button>
+  <div class="vault-open" id="vaultOpen">
+    <div class="vault-grid">
+      <div class="dead" style="--rot:-1.2deg"><span class="stamp2">REJECTED</span><h5>Coffee case: "Meet our beans" origin-story series</h5><p class="why">every café on earth has done this. familiarity kills memory. killed on day one.</p></div>
+      <div class="dead" style="--rot:.8deg"><span class="stamp2">REJECTED</span><h5>Dive case: drone reel of the island at golden hour</h5><p class="why">gorgeous. also exactly what the resorts post. beauty isn't a strategy — timing is.</p></div>
+      <div class="dead" style="--rot:-.6deg"><span class="stamp2">REJECTED</span><h5>Pilates case: transformation before/afters</h5><p class="why">converts at a discount gym. corrodes a luxury brand. the price tag said no.</p></div>
+      <div class="dead" style="--rot:1.4deg"><span class="stamp2">REJECTED</span><h5>Founder case: daily posting cadence</h5><p class="why">he has a company to run. systems that ignore the calendar die in week three.</p></div>
+      <div class="dead" style="--rot:-1.6deg"><span class="stamp2">REJECTED</span><h5>Hook draft: "5 tips to grow your brand in 2026"</h5><p class="why">if a hook could be posted by anyone, it will be remembered by no one.</p></div>
+      <div class="dead" style="--rot:.5deg"><span class="stamp2">REJECTED</span><h5>Launch case: 15% early-bird discount</h5><p class="why">discounts teach people your price was a lie. we offered first-run allocation instead.</p></div>
+    </div>
+    <p class="vault-note">The work you see in the case files survived this wall. That's what makes it believable.</p>
+  </div>
+</section>
+
+<!-- ============ NOTEBOOK ============ -->
+<section class="notebook" id="notebook">
+  <div class="page rv">
+    <div class="date">— last page of the lab notebook</div>
+    <p class="line">Good marketing is rarely one big idea.</p>
+    <p class="line">It is hundreds of thoughtful decisions.</p>
+    <p class="line em">Made carefully.</p>
+    <p class="line em">Made deliberately.</p>
+    <p class="line em">Made with curiosity.</p>
+    <p class="line">&nbsp;</p>
+    <p class="line">That's what this lab is for. <span style="color:var(--red)">— Z</span></p>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <h2 class="rv">Ready to build something <em>worth talking about?</em></h2>
+  <a class="mail rv" href="mailto:zaida.zaman@icloud.com?subject=Opening%20a%20case%20with%20The%20Brand%20Lab">zaida.zaman@icloud.com</a>
+  <p class="hand-ps rv">bring the problem. the lab handles the rest.</p>
+</section>
+
+<footer>
+  <span>© 2026 The Brand Lab · Zaida Zaman</span>
+  <div class="swatches" aria-hidden="true"><span style="background:#780000"></span><span style="background:#C1121F"></span><span style="background:#FDF0D5"></span><span style="background:#003049;border:1px solid rgba(253,240,213,.3)"></span><span style="background:#669BBC"></span></div>
+  <span>hiremarketingexpert.com</span>
+</footer>
+
+<!-- ================= CASE 001 · COFFEE ================= -->
+<dialog class="case theme-coffee" id="case-coffee" aria-label="Case 001: Beautiful Coffee, Forgettable Brand">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>001</b> · ATMOSPHERE: <b>WARM</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="meta"><span>Subject: independent café & bakery</span><span>Channel focus: Instagram-first</span><span>System: 90 days</span></div>
+    <h2>Beautiful Coffee.<br><em>Forgettable</em> Brand.</h2>
+    <p class="verdict">The coffee was excellent. The photos were gorgeous. Sales were flat. Nobody tagged them. Nobody remembered the name.</p>
+    <div class="hand-margin">regulars called it "the one near the corner." that's the whole case, really.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation</div>
+      <h3>Everyone loved the café. Nobody could name it.</h3>
+      <p>Regulars described the shop by its location, not its name. The feed was full of latte art and golden croissants — indistinguishable from forty other cafés in the same city. Foot traffic held steady; average spend and repeat frequency didn't move.</p>
+      <p><strong>The tell:</strong> beautiful content, zero customer tags. When people don't tag you, you're not part of their identity. You're just their supplier.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Research</div>
+      <h3>The category has one voice. We audited it.</h3>
+      <p>A 40-account audit of local café pages found the same four posts on rotation: latte art close-up, pastry flat lay, "we're open" graphic, seasonal drink. Swapping the logos between accounts changed nothing. Customer interviews surfaced the real driver: regulars didn't come for coffee — they came for a <strong>moment built into their day</strong>. The walk. The first sip. Ten quiet minutes before work.</p>
+      <p class="pull">People weren't buying coffee. They were buying the best ten minutes of their morning — and no brand had claimed them.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Insight → Hypothesis</div>
+      <h3>Brand the ritual, not the product.</h3>
+      <p><strong>Insight:</strong> pretty is forgettable; ritual is unforgettable. Habits get names when brands give them one.</p>
+      <p><strong>Hypothesis:</strong> if the café stops selling coffee and starts naming, owning and celebrating the morning ritual, it becomes a habit with a name — moving repeat frequency and average spend, the two levers that actually grow café revenue.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Strategy</div>
+      <h3>"The Morning Standard."</h3>
+      <p>Position the café as the city's morning ritual — the standard by which mornings are measured. Three pillars, nothing else allowed on the feed:</p>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Pillar 01</span><h5>The Ritual</h5><p>The 7:58 queue, the first sip, the newspaper-and-croissant moment. The customer sees themselves, not the product.</p></div>
+        <div class="asset"><span class="k">Pillar 02</span><h5>The Craft</h5><p>Proof of obsession: lamination at 5am, the tamp, the pour. Craft earns the price point without mentioning price.</p></div>
+        <div class="asset"><span class="k">Pillar 03</span><h5>The Regulars</h5><p>The community as the cast. Named regulars, their orders, their corners. People return to places that know them.</p></div>
+      </div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Creative & Photography Direction</div>
+      <h3>Warm film. Hands in every frame. A newspaper motif.</h3>
+      <p>Everything graded like morning light on film. A human hand in every single frame — mirror-neuron psychology makes hand-in-frame content feel like <em>your</em> hand, your morning. The newspaper becomes the recurring visual signature no competitor owns. One rule above all: never show a product without the moment around it.</p>
+      <div class="spread"><img src="assets/case-coffee-grid.png" alt="Feed system for the café: croissants, latte art, warm morning ritual photography" loading="lazy"><span class="spread-cap">Exhibit A — feed system, first nine posts of "The Morning Standard"</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Campaign — Instagram · Reels · Stories · Email · Paid</div>
+      <h3>Sample assets from the kit</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Reel 01 · Ritual</span><h5>"POV: it's 7:58 and your croissant comes out at 8:04."</h5><p>Real-time countdown to the bake. Anticipation loops hold viewers to the payoff — training the algorithm and the habit at once.</p></div>
+        <div class="asset"><span class="k">Reel 02 · Craft</span><h5>"We timed how long our croissant stays audibly crispy. Sound on."</h5><p>ASMR crunch test with a running timer. Specificity gives people language to describe quality — that's what gets shared.</p></div>
+        <div class="asset"><span class="k">Reel 03 · Regulars</span><h5>"Our regulars ranked the best seat in the house. Nº 1 will start arguments."</h5><p>Manufactured debate = comments = reach. Quietly proves this café has regulars with opinions.</p></div>
+        <div class="asset"><span class="k">Caption · Post 05</span><h5>The 8:07 flat white</h5><p>"To the man who has ordered the same flat white for three years: your cup is on the bar at 8:10. We started making it at 8:07. That's the whole business model."</p></div>
+        <div class="asset"><span class="k">Stories · Weekly arc</span><h5>"Regulars' Row"</h5><p>Mon poll ("croissant or pain au choc — settle it"), Wed behind-counter timelapse, Fri a named regular's order, plated. Replies become the loyalty DM channel.</p></div>
+        <div class="asset"><span class="k">Paid + Email</span><h5>"You don't need better coffee. You need a better morning."</h5><p>Cold: first croissant free before 8am, any Monday — trial at the exact hour the habit forms. Email Nº 1: "The 8:04 croissant (a love story in 81 layers)."</p></div>
+      </div>
+      <div class="deliverables"><span>12 posts</span><span>15 reels</span><span>20 story sequences</span><span>10 carousels</span><span>Meta ads</span><span>Email flow</span><span>UGC brief</span><span>Photo direction</span><span>Landing copy</span><span>KPI board</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline → Expected Results</div>
+      <h3>90-day targets — metrics that predict revenue.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">2–3×</div><div class="l">Saves & shares per post — the habit signal</div></div>
+        <div class="kpi"><div class="v">+40%</div><div class="l">Customer tags & UGC — identity adoption</div></div>
+        <div class="kpi"><div class="v">+15–20%</div><div class="l">Repeat visits via loyalty sign-ups</div></div>
+        <div class="kpi"><div class="v">Wk 6</div><div class="l">"The Morning Standard" used unprompted by customers</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>The temptation with a beautiful product is to keep photographing it. Resist. Beauty got this café to "liked." Only meaning gets a brand to "remembered." Every decision in this file — the hands, the newspaper, the 8:04 timestamp — moves the brand out of the product category and into the customer's daily identity. That's where price sensitivity dies and repeat purchase lives.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">Next investigation → Case 002: Paradise Hidden In Plain Sight</span><button class="btn" data-next="case-dive">Open Case 002 →</button></div>
+</div>
+</dialog>
+
+<!-- ================= CASE 002 · DIVE ================= -->
+<dialog class="case theme-dive" id="case-dive" aria-label="Case 002: Paradise Hidden In Plain Sight">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>002</b> · ATMOSPHERE: <b>UNDERWATER</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="bubbles" aria-hidden="true">
+      <i style="left:8%;width:10px;height:10px;animation-duration:11s"></i>
+      <i style="left:22%;width:6px;height:6px;animation-duration:14s;animation-delay:3s"></i>
+      <i style="left:47%;width:13px;height:13px;animation-duration:9s;animation-delay:1s"></i>
+      <i style="left:68%;width:7px;height:7px;animation-duration:13s;animation-delay:5s"></i>
+      <i style="left:86%;width:10px;height:10px;animation-duration:10s;animation-delay:2s"></i>
+    </div>
+    <div class="meta"><span>Subject: independent dive centre</span><span>Channel focus: planning-phase content</span><span>System: one season</span></div>
+    <h2>Paradise Hidden<br>In <em>Plain Sight.</em></h2>
+    <p class="verdict">World-class reef. Certified instructors. Empty calendar. Tourists were booking dives with resort operators before their plane even landed.</p>
+    <div class="hand-margin">the decision happens on a sofa, weeks before the beach.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation</div>
+      <h3>The awareness problem wasn't reach. It was timing.</h3>
+      <p>The centre's content — and every competitor's — spoke to people already on the island: "Book today!" But dive decisions aren't made on the island. They're made 2–6 weeks earlier, inside a planning spreadsheet and a saved-posts folder. <strong>The tell:</strong> high walk-past traffic, low walk-in conversion. The dive budget was spent before arrival.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Research</div>
+      <h3>We mapped the decision, not the demographic.</h3>
+      <p>Trip-planning behaviour: saved Reels, "things to do in ___" searches, TripAdvisor cross-checks — all weeks pre-arrival. Resort operators dominated arrival-moment visibility but produced nothing for the planning phase. No answers to "is diving scary?", "can beginners do it?", "what does it actually cost?"</p>
+      <p class="pull">Awareness isn't being seen by everyone. It's being unmissable at the exact moment the decision is made.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Insight → Strategy</div>
+      <h3>"The Pre-Trip Pipeline."</h3>
+      <p><strong>Insight:</strong> first-time divers aren't buying a dive. They're buying reassurance — that they'll be safe, that they won't look foolish, that the money is worth it. Fear is the real competitor, not the resort.</p>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Engine 01</span><h5>Savable planning content</h5><p>Reels titled the way people search: "First time diving? Watch this before you book." A save is a booking intention with a timestamp.</p></div>
+        <div class="asset"><span class="k">Engine 02</span><h5>Reassurance content</h5><p>Instructor faces, safety rituals, first-breath reactions. People book people.</p></div>
+        <div class="asset"><span class="k">Engine 03</span><h5>Proof flywheel</h5><p>Every diver leaves with a free 15-second edit of their first breath underwater — engineered UGC that markets to their entire friend list, plus a same-day review ask.</p></div>
+      </div>
+      <div class="spread"><img src="assets/case-dive-grid.png" alt="Feed system for the dive centre: turquoise water, divers, turtles, gear rooms" loading="lazy"><span class="spread-cap">Exhibit A — feed system: turquoise-coded, built for the planning phase</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Campaign — Reels · Stories · Paid · Email · Reviews</div>
+      <h3>Sample assets from the kit</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Reel 01 · Reassurance</span><h5>"Your first breath underwater. We film it every time. Here's why people cry."</h5><p>Genuine first-breath reactions. Everyone has reef footage; nobody owns the feeling.</p></div>
+        <div class="asset"><span class="k">Reel 02 · Planning</span><h5>"What a beginner dive actually costs (nothing hidden, we promise)."</h5><p>Price transparency is a pattern interruption in a category that hides rates. Saved by planners, shared with travel buddies.</p></div>
+        <div class="asset"><span class="k">Reel 03 · Authority</span><h5>"Things you're allowed to be scared of. Things you're not. From a 4,000-dive instructor."</h5><p>Authority plus humour. The instructor becomes the face; faces convert.</p></div>
+        <div class="asset"><span class="k">Stories · Arrival week</span><h5>"This week's water"</h5><p>Daily visibility + temperature updates. Utility that earns the follow during the trip — with the booking link one tap away.</p></div>
+        <div class="asset"><span class="k">Paid · Planning phase</span><h5>"You'll plan the restaurants. Plan the part you'll never forget."</h5><p>Geo-targeted to feeder cities 2–6 weeks pre-season → beginner FAQ page with WhatsApp booking.</p></div>
+        <div class="asset"><span class="k">Email · Pre-arrival</span><h5>"Your dive is in 12 days. Here's exactly what to expect."</h5><p>Kills no-shows, sells the second dive before the first happens. Review QR at gear return feeds the flywheel.</p></div>
+      </div>
+      <div class="deliverables"><span>12 posts</span><span>15 reels</span><span>20 story sequences</span><span>10 carousels</span><span>Meta ads</span><span>Pre-arrival email flow</span><span>UGC capture system</span><span>Review flywheel</span><span>Landing copy</span><span>KPI board</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline → Expected Results</div>
+      <h3>One-season targets.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">Nº 1</div><div class="l">Save rate vs local competitors — planning-phase share</div></div>
+        <div class="kpi"><div class="v">+50%</div><div class="l">Pre-arrival DM & WhatsApp inquiries</div></div>
+        <div class="kpi"><div class="v">30→60%</div><div class="l">Share of bookings made before guests land</div></div>
+        <div class="kpi"><div class="v">×2</div><div class="l">Monthly Google reviews via gear-return QR</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>Everyone in this category markets the ocean. The ocean doesn't need marketing — it's the best creative asset on Earth. What needs marketing is the nervous beginner's decision. Move the entire content system upstream to the sofa where trips are planned, and "awareness" stops being a reach metric and becomes a booking pipeline.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">Next investigation → Case 003: Luxury Studio. Generic Marketing.</span><button class="btn" data-next="case-pilates">Open Case 003 →</button></div>
+</div>
+</dialog>
+
+<!-- ================= CASE 003 · PILATES ================= -->
+<dialog class="case theme-pilates" id="case-pilates" aria-label="Case 003: Luxury Studio, Generic Marketing">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>003</b> · ATMOSPHERE: <b>CALM</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="meta"><span>Subject: boutique pilates studio</span><span>Channel focus: Instagram rebuild</span><span>System: 60 days</span></div>
+    <h2>Luxury Studio.<br><em>Generic</em> Marketing.</h2>
+    <p class="verdict">Premium-priced reformer classes, marketed like a discount gym — schedules, stock quotes, "20% off this week!" The price and the feed were telling two different stories.</p>
+    <div class="hand-margin">in luxury, restraint is the loudest thing you can say.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation</div>
+      <h3>The feed was undercutting the price tag.</h3>
+      <p>The studio charged luxury rates and delivered a luxury experience — then posted class schedules and discount graphics. Prospects felt the mismatch even without naming it: <strong>if the brand doesn't act premium, the price feels like a mistake.</strong> Inquiries stalled at "how much?" and vanished.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Research</div>
+      <h3>We studied what their clients actually engage with.</h3>
+      <p>An audit of the target clientele's follows and saves showed a consistent visual diet: interiors, quiet-luxury fashion, slow mornings, editorial wellness. Zero discount graphics. Meanwhile every competing studio ran the identical schedule–quote–promo cycle — which meant "calm and editorial" was sitting unclaimed.</p>
+      <p class="pull">Luxury clients don't buy workouts. They buy who they become in that room — and the feed has to look like that person's life.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Insight → Strategy</div>
+      <h3>"The Quiet Flex."</h3>
+      <p><strong>Hypothesis:</strong> rebuild the feed as an editorial identity magazine — texture, stillness, ritual — and the right clients pre-qualify themselves, price becomes a non-conversation, and profile visits convert to intro bookings.</p>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Rule 01</span><h5>Never discount in public</h5><p>Offers move to email and DM only. Publicly, the price is the price — that's what premium sounds like.</p></div>
+        <div class="asset"><span class="k">Rule 02</span><h5>Texture over text</h5><p>Cream, bone, oak, linen. Words set small and few. The grid should feel the way the studio smells.</p></div>
+        <div class="asset"><span class="k">Rule 03</span><h5>Identity, not anatomy</h5><p>No "target your core." Show the life around the practice — the socks, the bottle, the 9am light. Belonging sells the membership.</p></div>
+      </div>
+      <div class="spread"><img src="assets/case-pilates-grid.png" alt="Feed system for the pilates studio: cream tones, reformers, quiet editorial wellness" loading="lazy"><span class="spread-cap">Exhibit A — feed system: the editorial rebuild, first nine</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Campaign — Reels · Stories · Email · Paid</div>
+      <h3>Sample assets from the kit</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Reel 01 · Atmosphere</span><h5>"9:00am at the studio. Sound on. That's it. That's the ad."</h5><p>Ambient reformer sounds, morning light, no voiceover. In a loud category, silence is the scroll-stopper.</p></div>
+        <div class="asset"><span class="k">Reel 02 · Identity</span><h5>"Things we don't do here: mirror selfies, leaderboards, yelling."</h5><p>Positioning by negation — telling people what you're not attracts exactly who you are.</p></div>
+        <div class="asset"><span class="k">Reel 03 · Craft</span><h5>"Why our reformers are oak, and why that costs us more."</h5><p>Materials storytelling justifies premium pricing without ever discussing price.</p></div>
+        <div class="asset"><span class="k">Stories · Weekly arc</span><h5>"The Quiet Hour"</h5><p>Sunday wind-down: one featured class, one instructor note, one texture shot. "Four mats left" replaces promos — scarcity as intimacy.</p></div>
+        <div class="asset"><span class="k">Email · Velvet rope</span><h5>"The list gets the studio first."</h5><p>Intro offers, workshops and waitlist drops live only in email. The public feed stays pristine.</p></div>
+        <div class="asset"><span class="k">Paid + funnel</span><h5>"A stronger body. A quieter mind. A more beautiful hour."</h5><p>Editorial stills, no discount hook → calm intro-class page. Comment-word automation ("QUIET") delivers the offer privately by DM.</p></div>
+      </div>
+      <div class="deliverables"><span>12 posts</span><span>15 reels</span><span>20 story sequences</span><span>10 carousels</span><span>Meta ads</span><span>Email flow</span><span>Voice guide</span><span>Photo direction</span><span>Landing copy</span><span>KPI board</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline → Expected Results</div>
+      <h3>60-day targets.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">0</div><div class="l">Public discount posts — and holding</div></div>
+        <div class="kpi"><div class="v">+35%</div><div class="l">Profile-visit → intro-offer conversion</div></div>
+        <div class="kpi"><div class="v">3×</div><div class="l">Saves per post — the luxury-intent signal</div></div>
+        <div class="kpi"><div class="v">−50%</div><div class="l">"How much?" DMs — pre-qualified audience arriving instead</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>Better social media is rarely about posting more. Here it meant posting less, saying less, and discounting never. The feed's only job is to look like the client's best self — the version of her that keeps the 9am booking. When the brand's confidence matches the price tag, the price conversation ends before it starts.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">Next investigation → Case 004: Brilliant Founder. Invisible Online.</span><button class="btn" data-next="case-founder">Open Case 004 →</button></div>
+</div>
+</dialog>
+
+<!-- ================= CASE 004 · FOUNDER ================= -->
+<dialog class="case theme-founder" id="case-founder" aria-label="Case 004: Brilliant Founder, Invisible Online">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>004</b> · ATMOSPHERE: <b>EDITORIAL</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="meta"><span>Subject: B2B founder, 12 yrs expertise</span><span>Channel focus: LinkedIn-first</span><span>System: 90 days</span></div>
+    <h2>Brilliant Founder.<br><em>Invisible</em> Online.</h2>
+    <p class="verdict">Twelve years of expertise. A client list built entirely on referrals. And a LinkedIn profile that read like a CV from 2014. In rooms, unforgettable. Online, undiscoverable.</p>
+    <div class="hand-margin">buyers audit the founder before they answer the proposal.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation → Research</div>
+      <h3>The expertise existed. The evidence didn't.</h3>
+      <p>Buyers now check the founder's profile before replying to the company's proposal. His footprint showed a job title and a logo — while louder, less experienced competitors were invited onto podcasts and panels because they were <strong>findable and quotable.</strong></p>
+      <p class="pull">On LinkedIn, the most visible expert wins deals the best expert never hears about.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Insight → Strategy</div>
+      <h3>"The Evidence Engine."</h3>
+      <p><strong>Insight:</strong> founder brands fail when they imitate influencers. They work when they publish evidence — opinions with receipts, patterns from real client work, takes only twelve years of reps could produce.</p>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Lane 01 · Contrarian</span><h5>"The advice in this industry is mostly recycled. Here's what happened when we tested it."</h5><p>One strong opinion a week, backed by a real anonymised result. Disagreement is distribution.</p></div>
+        <div class="asset"><span class="k">Lane 02 · Pattern</span><h5>"After 200 engagements, the same 3 mistakes appear every time."</h5><p>Pattern posts turn tenure into content. Nobody can copy twelve years of reps.</p></div>
+        <div class="asset"><span class="k">Lane 03 · Story</span><h5>"The deal we walked away from — and the number it saved us."</h5><p>Vulnerable, specific, first-person. Stories build the trust the other lanes convert.</p></div>
+      </div>
+    </div>
+    <div class="cs rv"><div class="cs-label">System Design — built for a real calendar</div>
+      <h3>Runs on 90 minutes a week.</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Capture</span><h5>The Friday voice note</h5><p>He records 10 minutes of raw takes weekly. That's his entire time cost. Everything downstream is extraction, drafting, and his final edit — his voice, amplified by the system.</p></div>
+        <div class="asset"><span class="k">Profile rebuild</span><h5>From CV to landing page</h5><p>Headline rewritten around the buyer's problem, not his title. Featured: one case result, one point of view, one way to start a conversation.</p></div>
+        <div class="asset"><span class="k">Cadence</span><h5>3 posts / week · 1 monthly flagship</h5><p>Tue contrarian, Thu pattern, Sat story. One monthly framework post engineered for saves — with his name on it.</p></div>
+        <div class="asset"><span class="k">Conversion layer</span><h5>Comments → conversations</h5><p>20 minutes daily engaging on target buyers' posts. DMs open with observations, never pitches. Pipeline is built in the replies.</p></div>
+      </div>
+      <div class="deliverables"><span>Profile rewrite</span><span>90-day calendar</span><span>36 post drafts</span><span>1 flagship framework</span><span>Voice guide</span><span>Engagement protocol</span><span>DM guide</span><span>Monthly analytics</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline → Expected Results</div>
+      <h3>90-day targets.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">Wk 2</div><div class="l">First post outperforming a year of prior activity</div></div>
+        <div class="kpi"><div class="v">5–10</div><div class="l">Qualified buyer conversations per month from content</div></div>
+        <div class="kpi"><div class="v">×4</div><div class="l">Profile views from decision-makers</div></div>
+        <div class="kpi"><div class="v">1</div><div class="l">Named framework associated with him in his niche</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>A founder brand isn't a personal brand. Nobody needs him famous — they need him to be the obvious choice when the buying moment arrives. Evidence over aesthetics, patterns over platitudes, and a system light enough to survive his calendar. Authority compounds; the only unforgivable mistake is inconsistency.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">Next investigation → Case 005: Followers. No Customers.</span><button class="btn" data-next="case-followers">Open Case 005 →</button></div>
+</div>
+</dialog>
+
+<!-- ================= CASE 005 · FOLLOWERS ================= -->
+<dialog class="case theme-followers" id="case-followers" aria-label="Case 005: Followers, No Customers">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>005</b> · ATMOSPHERE: <b>AUDIT</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="meta"><span>Subject: creator-led brand, 48k followers</span><span>Channel focus: funnel architecture</span><span>System: 60 days</span></div>
+    <h2>Followers.<br><em>No</em> Customers.</h2>
+    <p class="verdict">48,000 people watching. Strong engagement. Viral moments. And a revenue line that looked like the account had 400 followers. The audience was real. The business wasn't reaching it.</p>
+    <div class="hand-margin">an audience is not a market until there's a path between them.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation</div>
+      <h3>The audience was trained to expect entertainment — and nothing else.</h3>
+      <p>Two years of content optimised for reach: trends, hooks, punchlines. It worked — for reach. But the account had never asked for anything, never built a path, never introduced an offer. <strong>The audience wasn't ignoring the business. They didn't know one existed.</strong></p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Research</div>
+      <h3>We audited the 48,000.</h3>
+      <p>Follower analysis split the audience into three groups: passive entertainment viewers (~70%), topic-invested followers who save and comment substantively (~25%), and existing fans who'd buy today if asked (~5%). The content served the first group exclusively — the group least likely to ever spend. The DMs contained months of unanswered buying signals: "do you do this for clients?", "is there a guide?"</p>
+      <p class="pull">Reach content builds a crowd. Intent content builds a queue. This account had a crowd standing outside an unmarked door.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Insight → Strategy</div>
+      <h3>"The Bridge."</h3>
+      <p><strong>Insight:</strong> followers don't convert because conversion was never designed. Monetising an audience isn't about selling harder — it's about building the missing bridge: intent content → owned channel → offer.</p>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Span 01</span><h5>Intent content (20% of the calendar)</h5><p>Keep the reach engine at 80%. Add weekly depth content for the 25%: process breakdowns, results, "how I'd do this for you." Reach feeds the top; intent feeds the queue.</p></div>
+        <div class="asset"><span class="k">Span 02</span><h5>The owned channel</h5><p>A single lead magnet built from the most-saved post's topic, delivered by comment-word automation → email list. Rented audience becomes owned audience.</p></div>
+        <div class="asset"><span class="k">Span 03</span><h5>The offer, finally</h5><p>One clear offer with one price, introduced through a story sequence — not a pitch post. The 5% convert first and become the proof for the 25%.</p></div>
+      </div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Campaign — Content · DM · Email</div>
+      <h3>Sample assets from the kit</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Reel · Intent</span><h5>"You've watched me do this for two years. Here's what it looks like when I do it for a client."</h5><p>The bridge post. Converts parasocial familiarity into commercial permission — the audience finally gets told the door exists.</p></div>
+        <div class="asset"><span class="k">Story sequence · Launch</span><h5>"I've been answering the same DM for a year. So I built the answer."</h5><p>Offer introduced as a response to demand, not a pitch. Social proof is baked into the origin story.</p></div>
+        <div class="asset"><span class="k">DM protocol</span><h5>Buying-signal triage</h5><p>Every "do you do this?" DM gets a 3-message discovery flow — question, context, invitation. No links fired blind. Discovery before selling, always.</p></div>
+        <div class="asset"><span class="k">Email 01</span><h5>"You're one of 48,000. This list is smaller on purpose."</h5><p>Positions the list as the inner room. Insider framing beats urgency framing for warm audiences.</p></div>
+      </div>
+      <div class="deliverables"><span>Audience audit</span><span>Offer architecture</span><span>Lead magnet</span><span>Comment automation</span><span>DM discovery flow</span><span>5-email nurture</span><span>Launch story sequence</span><span>Content rebalance calendar</span><span>KPI board</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline → Expected Results</div>
+      <h3>60-day targets.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">5–8%</div><div class="l">Followers → email list in 60 days</div></div>
+        <div class="kpi"><div class="v">Wk 3</div><div class="l">First revenue attributable to the bridge</div></div>
+        <div class="kpi"><div class="v">×10</div><div class="l">Buying-signal DMs answered with a real path</div></div>
+        <div class="kpi"><div class="v">80/20</div><div class="l">Reach/intent calendar balance — reach never sacrificed</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>The instinct here is always "post more salesy content" — which kills the reach engine that built the asset. Wrong surgery. The account didn't have a content problem; it had an architecture problem. Keep the crowd coming, mark the door, build the corridor, and let the 5% walk through first. Monetisation done right is invisible to the 70% who just came for the show.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">Final investigation → Case 006: Launch In Fourteen Days.</span><button class="btn" data-next="case-launch">Open Case 006 →</button></div>
+</div>
+</dialog>
+
+<!-- ================= CASE 006 · LAUNCH ================= -->
+<dialog class="case theme-launch" id="case-launch" aria-label="Case 006: Launch In Fourteen Days, Nothing Ready">
+<div class="case-inner">
+  <div class="case-top"><span class="id">CASE <b>006</b> · ATMOSPHERE: <b>URGENT</b> · STATUS: <b>SOLVED</b></span><button class="case-close" data-close>Close file ✕</button></div>
+  <div class="case-hero">
+    <div class="meta"><span>Subject: D2C product, date fixed</span><span>Constraint: 14 days, no audience</span><span>System: sprint protocol</span></div>
+    <h2>Launch In<br>Fourteen Days.<br><em>Nothing Ready.</em></h2>
+    <p class="verdict">The date was locked. The audience didn't exist. The assets weren't made. The classic move is panic-posting for two weeks. The lab has a different protocol.</p>
+    <div class="hand-margin">constraints don't kill launches. indecision does.</div>
+  </div>
+  <div class="case-body">
+    <div class="cs rv"><div class="cs-label">Observation → Insight</div>
+      <h3>Fourteen days is not enough time to build an audience. It's enough to borrow one.</h3>
+      <p>A launch needs attention, belief, and a reason to act now. With no runway, attention can't be grown — it has to be borrowed from people who already have it. And belief can't be manufactured — it has to be transferred from voices the audience already trusts.</p>
+      <p class="pull">A 14-day launch is not a small version of a 90-day launch. It's a different animal: one asset, one channel, one offer, borrowed reach.</p>
+    </div>
+    <div class="cs rv"><div class="cs-label">Strategy</div>
+      <h3>"The Runway Protocol." Cut everything that isn't load-bearing.</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Cut 01</span><h5>One hero asset, not a content calendar</h5><p>A single 60-second founder film — the problem, the fix, the proof — cut into 5 formats. Everything else is derivative of this one asset.</p></div>
+        <div class="asset"><span class="k">Cut 02</span><h5>One channel, not omnipresence</h5><p>Pick where the buyer already is; ignore everything else. Fourteen days of focus beats fourteen days of everywhere.</p></div>
+        <div class="asset"><span class="k">Cut 03</span><h5>Borrowed audiences</h5><p>5–10 micro-creators and partners seeded in week one with product + the founder film. Their day-8 posts ARE the awareness campaign.</p></div>
+        <div class="asset"><span class="k">Cut 04</span><h5>One honest scarcity</h5><p>First-run quantity, stated plainly. Real numbers, no fake countdowns. Honesty is the only urgency that survives contact with a smart audience.</p></div>
+      </div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Launch Timeline — the fourteen days</div>
+      <h3>Day by day.</h3>
+      <div class="asset-cards">
+        <div class="asset"><span class="k">Days 1–2</span><h5>Decide & script</h5><p>Positioning locked in one page: the enemy (the compromise the product ends), the promise, the proof. Hero film scripted.</p></div>
+        <div class="asset"><span class="k">Days 3–5</span><h5>Shoot & seed</h5><p>Hero film shot on a phone — authenticity outperforms polish at this speed. Product + film shipped to 10 creators. Waitlist page live: one headline, one field.</p></div>
+        <div class="asset"><span class="k">Days 6–9</span><h5>Tension</h5><p>Founder posts the problem daily — no product shown. Creators tease receipt. Waitlist warms with two emails: the story, then the date.</p></div>
+        <div class="asset"><span class="k">Days 10–13</span><h5>Convergence</h5><p>Creator posts drop in a coordinated 72-hour window. Hero film published. Retargeting switched on over everyone who touched the story.</p></div>
+        <div class="asset"><span class="k">Day 14</span><h5>The door opens</h5><p>Waitlist gets first access at 9am; public at noon. First-run numbers stated. Founder live in comments all day — launch day is a customer-service event.</p></div>
+      </div>
+      <div class="deliverables"><span>Positioning one-pager</span><span>Hero film script</span><span>5 cutdowns</span><span>Creator seeding kit</span><span>Waitlist page</span><span>4-email flow</span><span>Launch-day runbook</span><span>Retargeting set</span><span>Day-15 debrief</span></div>
+    </div>
+    <div class="cs rv"><div class="cs-label">Expected Results</div>
+      <h3>What fourteen days can honestly deliver.</h3>
+      <div class="kpi-row">
+        <div class="kpi"><div class="v">10</div><div class="l">Borrowed audiences activated by day 10</div></div>
+        <div class="kpi"><div class="v">Day 14</div><div class="l">First-run allocation claimed by waitlist first</div></div>
+        <div class="kpi"><div class="v">1</div><div class="l">Proven hook identified for the post-launch paid engine</div></div>
+        <div class="kpi"><div class="v">Day 15</div><div class="l">Debrief: what the sprint taught us about the 90-day plan</div></div>
+      </div>
+    </div>
+    <div class="cd-note rv"><div class="cs-label">Creative Director Notes</div>
+      <p>Rushed launches fail because teams try to shrink a big launch instead of designing a small one. The protocol is subtraction: one asset, one channel, one offer, borrowed reach, honest scarcity. Day 15 matters as much as day 14 — a sprint launch is also the cheapest market research the brand will ever run.</p>
+      <p class="sig">— Z, The Brand Lab</p>
+    </div>
+  </div>
+  <div class="case-next"><span class="mono">End of the archive → try the Creative Lab, or open Case 001 again</span><button class="btn" data-next="case-coffee">Reopen Case 001 →</button></div>
+</div>
+</dialog>
+
+<script>
+/* ================= CASE DIALOGS ================= */
+document.querySelectorAll('.case-row').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const d=document.getElementById(btn.dataset.case);
+    if(d){d.showModal();d.querySelector('.case-inner').scrollTop=0;obsInDialog(d);}
+  });
+});
+document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>b.closest('dialog').close()));
+document.querySelectorAll('[data-next]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    b.closest('dialog').close();
+    const nxt=document.getElementById(b.dataset.next);
+    if(nxt){nxt.showModal();nxt.querySelector('.case-inner').scrollTop=0;obsInDialog(nxt);}
+  });
+});
+document.querySelectorAll('dialog.case').forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close();}));
+
+/* ================= REVEALS ================= */
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+document.querySelectorAll('body > * .rv, section .rv').forEach(el=>io.observe(el));
+function obsInDialog(d){
+  const root=d.querySelector('.case-inner');
+  const io2=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io2.unobserve(e.target);}})},{root,threshold:.1});
+  d.querySelectorAll('.rv').forEach(el=>io2.observe(el));
+}
+
+/* ================= REDUCED MOTION ================= */
+const RM=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ================= ACTS (pinned statements) ================= */
+const acts=[...document.querySelectorAll('[data-act]')];
+const actsSec=document.getElementById('acts');
+const dotsWrap=document.getElementById('actsDots');
+acts.forEach(()=>dotsWrap.appendChild(document.createElement('i')));
+const dots=[...dotsWrap.children];
+
+/* ================= OBSERVATION WALL ================= */
+const board=document.getElementById('board');
+const pins=[
+  {t:'note',cls:'',html:'"Everyone photographs coffee."',x:6,y:30,r:-3},
+  {t:'note',cls:'red',html:'"Nobody photographs the pause before the first sip."',x:20,y:56,r:2},
+  {t:'photo',src:'assets/case-coffee-grid.png',cap:'ref — morning ritual',x:40,y:24,r:3,pos:'50% 20%'},
+  {t:'note',cls:'',html:'We keep asking <span class="q">what to post.</span>',x:58,y:52,r:-2},
+  {t:'note',cls:'red',html:'We should be asking <span class="q">why anyone would care.</span>',x:72,y:22,r:2.5},
+  {t:'photo',src:'assets/case-dive-grid.png',cap:'ref — the planning phase',x:8,y:66,r:-2,pos:'50% 45%'},
+  {t:'stat',k:'Signal, not noise',v:'Saves > Likes',s:'a save is a plan',x:44,y:66,r:1.5},
+  {t:'note',cls:'',html:'"Luxury whispers. Discounts shout."',x:84,y:58,r:-2.5},
+  {t:'photo',src:'assets/case-pilates-grid.png',cap:'ref — quiet flex',x:70,y:68,r:2,pos:'50% 30%'},
+  {t:'note',cls:'red',html:'People don\u2019t tag suppliers. They tag <span class="q">identity.</span>',x:26,y:18,r:-1.5},
+];
+const pinEls=pins.map((p,i)=>{
+  const el=document.createElement('div');
+  el.className='pin-item';
+  if(p.t==='note'){el.innerHTML=`<div class="note ${p.cls}">${p.html}</div>`;}
+  else if(p.t==='photo'){el.innerHTML=`<div class="photo"><img src="${p.src}" alt="pinned reference" style="object-position:${p.pos}" loading="lazy"><div class="cap">${p.cap}</div></div>`;}
+  else{el.innerHTML=`<div class="statcard"><div class="k">${p.k}</div><div class="v">${p.v}</div><div class="s">${p.s}</div></div>`;}
+  board.appendChild(el);
+  return el;
+});
+const wallWrap=document.getElementById('wall');
+
+/* ================= SCROLL ENGINE ================= */
+function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
+function ease(t){return 1-Math.pow(1-t,3);}
+let ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(()=>{
+    const y=window.scrollY,vh=window.innerHeight;
+
+    /* acts */
+    const aTop=actsSec.offsetTop,aH=actsSec.offsetHeight-vh;
+    const ap=clamp((y-aTop)/aH,0,1);
+    const idx=clamp(Math.floor(ap*acts.length),0,acts.length-1);
+    acts.forEach((a,i)=>a.classList.toggle('on',i===idx));
+    dots.forEach((d,i)=>d.classList.toggle('on',i<=idx));
+
+    /* wall */
+    const wTop=wallWrap.offsetTop,wH=wallWrap.offsetHeight-vh;
+    const wp=clamp((y-wTop)/wH,0,1);
+    const step=.75/pins.length;
+    pinEls.forEach((el,i)=>{
+      const p=pins[i];
+      const lp=ease(clamp((wp-i*step)/.3,0,1));
+      const startX=p.x<50?-40:140, startY=130, startR=p.r*6;
+      const cx=startX+(p.x-startX)*lp, cy=startY+(p.y-startY)*lp, cr=startR+(p.r-startR)*lp;
+      el.style.transform=`translate(${cx}vw,${cy}svh) rotate(${cr}deg)`;
+      el.style.opacity=lp<.05?0:1;
+    });
+    ticking=false;
+  });
+}
+if(!RM){
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll);
+  onScroll();
+}else{
+  acts.forEach(a=>a.classList.add('on'));
+}
+
+/* ================= CREATIVE LAB ================= */
+const SECTORS=['Café & Food','Fitness & Wellness','Travel & Experience','Founder Brand','D2C Product'];
+const PROBLEMS=['Nobody knows us','Followers don\u2019t buy','Launching something','Customers don\u2019t return'];
+const HOOKS={
+ 'Café & Food':{
+  'Nobody knows us':[['"We\u2019re the café your favourite barista goes to on their day off."','Reel — 20s, one tracking shot through the door at opening','Borrowed credibility. Insiders\u2019 choices signal quality louder than any self-claim — the viewer wants to know what the experts know.','Saves + "where is this?" comments'],
+   ['"This street has 9 cafés. Here\u2019s the honest reason to walk past 8 of them."','Talking-head reel, filmed on the street itself','Confident comparison is a pattern interruption in a polite category. Specificity ("9 cafés") makes it feel like reporting, not bragging.','Profile visits from the reel']],
+  'Followers don\u2019t buy':[['"You\u2019ve liked 30 of our posts. You\u2019ve never been in. This one\u2019s for you."','Direct-address reel + first-visit offer in DM via comment word','Calling out the lurker converts parasocial habit into a plan. The DM delivery keeps the feed clean and makes intent measurable.','Comment-word triggers → redemptions'],
+   ['"Our regulars have a secret menu. Here\u2019s how you get on it."','Story sequence → email capture','Belonging mechanics. A "secret" converts observers into members — and the email list turns rented reach into owned reach.','Email sign-ups per week']],
+  'Launching something':[['"We tested 14 versions of this pastry. Numbers 1 through 13 are in the bin. Meet Nº 14."','Countdown carousel + launch-day reel','Iteration storytelling. Effort shown is quality believed — the bin is the proof of the standard.','Waitlist / day-one sellout time'],
+   ['"New item drops Friday. Regulars taste it Thursday. That\u2019s the rule."','Story-first launch, feed post after','Loyalty-first launches turn the existing base into the campaign. Scarcity plus insider access does the promotion for you.','Thursday RSVP count']],
+  'Customers don\u2019t return':[['"If we know your order before you say it — this post is about you."','Reel montage of regulars\u2019 orders being started on sight','Recognition is the deepest retention driver in hospitality. Publicising it invites everyone to want that status.','Repeat-visit rate / loyalty sign-ups'],
+   ['"The 8am seat. The window one. It\u2019s basically yours at this point."','Photo series naming customer rituals','Ritual branding. Naming the habit makes it identity — and identity doesn\u2019t churn.','Tags from regulars']]},
+ 'Fitness & Wellness':{
+  'Nobody knows us':[['"9:00am at the studio. Sound on. That\u2019s it. That\u2019s the ad."','Ambient reel, zero voiceover','In a loud category, silence stops the scroll. Atmosphere is a positioning statement no copy can fake.','Saves + profile visits'],
+   ['"Things we don\u2019t do here: mirror selfies, leaderboards, yelling."','Text-forward reel','Positioning by negation. Declaring what you\u2019re not filters in exactly who you\u2019re for.','Follower quality — intro-offer clicks']],
+  'Followers don\u2019t buy':[['"You\u2019ve watched us for months. Your first class is one comment away."','Reel + comment-word automation ("BEGIN") → DM offer','Reduces the ask to a single word. Friction, not desire, is usually what\u2019s missing between watching and booking.','Comment triggers → bookings'],
+   ['"The 9am class has had the same six people for a year. One mat just opened."','Story with countdown sticker','Scarcity as intimacy, not pressure. Community proof sells memberships better than transformation claims.','Intro bookings within 48h']],
+  'Launching something':[['"We spent 6 months building the class we couldn\u2019t find anywhere else."','Founder-voice film, 45s','Origin stories transfer belief. "Couldn\u2019t find it" positions the launch as a discovery, not a product.','Waitlist sign-ups'],
+   ['"New timetable drops Sunday. The list hears first. That\u2019s always the rule."','Email-first launch, social after','Trains the audience that email = privilege. Every launch grows the owned channel.','List growth during launch week']],
+  'Customers don\u2019t return':[['"We noticed you stopped coming. No guilt. Here\u2019s a soft way back in."','Win-back email, single CTA','Shame is why lapsed members never return. Removing it — explicitly — reopens the door cheaper than any acquisition ad.','Win-back redemption rate'],
+   ['"Month 3 is where everyone quits. So we built something for month 3."','Reel + milestone programme','Naming the churn point proves you understand the member\u2019s journey better than they do. Insight is retention.','90-day retention rate']]},
+ 'Travel & Experience':{
+  'Nobody knows us':[['"First time? Watch this before you book anything."','Search-titled reel — beginner FAQ','Planning-phase content. Titled the way people search, saved into itineraries weeks before arrival — awareness at the decision moment.','Save rate'],
+   ['"What this actually costs. Nothing hidden. We\u2019ll wait."','Price-transparency reel','Pattern interruption in a category that hides rates. Transparency reads as confidence and earns the comparison shortlist.','Shares to travel companions']],
+  'Followers don\u2019t buy':[['"You saved this post 3 months ago. Your trip is coming. Here\u2019s the next step."','Retargeting + booking-window email','Saves are declared intent with a timestamp. Activating them at the booking window converts old reach into new revenue.','Save-to-DM / booking conversion'],
+   ['"Send this to the friend who plans everything."','Shareable itinerary carousel','Recruits the group\u2019s decision-maker. In travel, one planner converts four passengers.','Shares + group inquiries']],
+  'Launching something':[['"We\u2019re opening 40 slots for something we\u2019ve never offered before."','Numbered-scarcity launch reel','Real numbers make scarcity credible. New-experience framing borrows the thrill of the category itself.','Slot claim velocity'],
+   ['"Our guides voted for the one experience we should add. Here\u2019s what won."','Behind-the-scenes story arc','Internal voting is social proof from the most trusted source — the people who do it daily.','Waitlist from story sequence']],
+  'Customers don\u2019t return':[['"You did the beginner one. This is what the second visit unlocks."','Post-experience email + progression content','Progression framing. Experiences retain when they\u2019re a path, not an event — level two must be visible from level one.','Second-booking rate'],
+   ['"One year ago today, you were here. The water misses you."','Anniversary retargeting','Memory marketing. Nostalgia triggers rebooking better than discounts — and costs nothing.','Anniversary-email rebookings']]},
+ 'Founder Brand':{
+  'Nobody knows us':[['"The advice in this industry is mostly recycled. We tested it. Here\u2019s what broke."','Contrarian post with an anonymised receipt','Disagreement is distribution. Evidence separates a point of view from an opinion — and buyers follow evidence.','Comments from target buyers'],
+   ['"After 200 client engagements, the same 3 mistakes appear every time."','Pattern post / carousel','Tenure as content. Nobody can copy twelve years of reps — pattern posts make experience visible and quotable.','Saves + profile views from ICP']],
+  'Followers don\u2019t buy':[['"I\u2019ve answered this same DM 30 times this year. So here\u2019s the full answer, publicly."','Flagship framework post','Demand-proof. Publishing the answer positions the offer as a response to the market, not a pitch at it.','Inbound qualified conversations'],
+   ['"Here\u2019s exactly what working with me looks like — including the part where I say no."','Process-transparency post','Showing the "no" builds more trust than any testimonial. Transparency pre-qualifies and shortens sales cycles.','Discovery calls booked']],
+  'Launching something':[['"I\u2019m opening 5 spots for something I\u2019ve only ever done inside retainers."','Scarcity + insider framing post','Real capacity limits are believable in services. "Only ever done inside" transfers the value of the existing work.','Spot claim rate'],
+   ['"I built this because three clients asked for it in the same month. That\u2019s not a coincidence — that\u2019s a market."','Origin-story launch post','Demand-led origin stories double as proof. The market asked; the founder answered.','Waitlist / inquiry volume']],
+  'Customers don\u2019t return':[['"The engagement ended 6 months ago. Here\u2019s what I\u2019d look at in your business today — free, no call."','Personalised re-engagement note','Generosity re-opens dormant relationships without the awkwardness of a pitch. Value first, always.','Reactivated client conversations'],
+   ['"Most consultants disappear after the invoice. Quarterly reviews are why mine don\u2019t have to hunt for referrals."','Retention-system post','Publicising the retention system attracts clients who want long-term partners — the profitable kind.','Referral inquiries']]},
+ 'D2C Product':{
+  'Nobody knows us':[['"You\u2019ve been putting up with this every day. We counted. Here\u2019s the fix."','Villain-first reel — problem dramatised, product absent','Enemy-first marketing. An audience that shares your enemy converts on sight when the resolution appears.','Comments agreeing with the problem'],
+   ['"We asked 50 people why they tolerate this. The answers are unhinged."','Vox-pop reel','The audience does the persuading; the brand holds the mic. UGC-style honesty outperforms polished claims for cold viewers.','Shares + watch-through rate']],
+  'Followers don\u2019t buy':[['"Prototype 1 broke in 3 days. Prototype 9 lasted a month. You\u2019re looking at Nº 23."','Iteration-story reel','Effort shown is quality believed. Iteration storytelling replaces the spec sheet with a narrative people repeat.','Product-page clicks from reel'],
+   ['"Everything wrong with our first version — according to our own customers."','Self-critique carousel','Radical honesty. Publishing your flaws makes every other claim credible. Trust converts; polish doesn\u2019t.','Review volume + conversion rate']],
+  'Launching something':[['"The compromise ends on the 14th. 300 units. Waitlist goes first."','Three-act launch: villain → tease → reveal','Narrative launches give strangers a reason to care before the price appears. Honest numbers make the scarcity real.','Waitlist ≥ 10× first run'],
+   ['"We sent it to 10 people who review things brutally. Their posts drop Thursday."','Creator-seeding convergence','Borrowed credibility, coordinated. A 72-hour review window creates the density that reads as "everyone\u2019s talking about it."','Creator-post reach + code use']],
+  'Customers don\u2019t return':[['"You\u2019ve had it for 30 days. Here are 3 things you probably haven\u2019t tried."','Post-purchase education flow','Usage drives repurchase. Customers who master a product return; customers who shelve it churn silently.','Repeat-purchase rate'],
+   ['"Our best customers do this one weird thing. (They subscribe and forget about us.)"','Subscription push, self-aware tone','Humour disarms the subscription ask. Framing it as what smart customers already do uses conformity, not pressure.','Subscription conversion']]}
+};
+let selSector=null,selProblem=null,lastIdx=-1;
+const sChips=document.getElementById('sectorChips'),pChips=document.getElementById('problemChips');
+SECTORS.forEach(s=>{const c=document.createElement('button');c.className='chip';c.textContent=s;c.onclick=()=>{selSector=s;[...sChips.children].forEach(x=>x.classList.toggle('sel',x===c));};sChips.appendChild(c);});
+PROBLEMS.forEach(p=>{const c=document.createElement('button');c.className='chip';c.textContent=p;c.onclick=()=>{selProblem=p;[...pChips.children].forEach(x=>x.classList.toggle('sel',x===c));};pChips.appendChild(c);});
+function runExperiment(){
+  if(!selSector||!selProblem){
+    document.getElementById('labPh').innerHTML='pick one from each list first —<br>even the lab needs a brief.';
+    return;
+  }
+  const bank=HOOKS[selSector][selProblem];
+  let i=Math.floor(Math.random()*bank.length);
+  if(bank.length>1&&i===lastIdx)i=(i+1)%bank.length;
+  lastIdx=i;
+  const [hook,format,why,metric]=bank[i];
+  document.getElementById('labPh').style.display='none';
+  document.getElementById('expNo').textContent='EXPERIMENT Nº '+String(Math.floor(100+Math.random()*900));
+  document.getElementById('expMeta').textContent=selSector+' · '+selProblem;
+  document.getElementById('expHook').textContent=hook;
+  document.getElementById('expFormat').textContent=format;
+  document.getElementById('expWhy').textContent=why;
+  document.getElementById('expMetric').textContent=metric;
+  const card=document.getElementById('expCard');
+  card.classList.remove('show');void card.offsetWidth;card.classList.add('show');
+}
+document.getElementById('runBtn').onclick=runExperiment;
+document.getElementById('againBtn').onclick=runExperiment;
+
+/* ================= VAULT ================= */
+const door=document.getElementById('vaultDoor');
+door.addEventListener('click',()=>{
+  door.style.display='none';
+  document.getElementById('vaultOpen').classList.add('show');
+});
+</script>
+</body>
+</html>
